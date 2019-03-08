@@ -9,7 +9,9 @@ import {
   DONE_ORDER,
   ORDERS_BYQUANTITY,
   OVERDUE_TIMER,
-  ITEM_COUNT
+  ITEM_COUNT,
+  GET_AVERAGE,
+  LOADER
 } from "../actions/types";
 
 const initialState = {
@@ -20,7 +22,9 @@ const initialState = {
   selected_category: "",
   orders_byquantity: [],
   overdue: 10,
-  item_count: 5
+  item_count: 5,
+  transaction_data: "",
+  loader: false
 };
 
 const squareReducer = (state = initialState, action) => {
@@ -86,6 +90,18 @@ const squareReducer = (state = initialState, action) => {
       return {
         ...state,
         item_count: action.payload
+      };
+    case GET_AVERAGE:
+      return {
+        ...state,
+        transaction_data: action.payload,
+        loader: false
+      };
+    case LOADER:
+      console.log(action.payload);
+      return {
+        ...state,
+        loader: action.payload
       };
     default:
       return state;

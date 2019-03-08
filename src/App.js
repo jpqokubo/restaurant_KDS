@@ -5,7 +5,7 @@ import { logoutUser } from "./actions/authActions";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Landing from "./components/layout/Landing";
 import Footer from "./components/layout/Footer";
-import Navbar from "./components/layout/Navbar";
+
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import ResetPassword from "./components/auth/ResetPassword";
@@ -15,7 +15,7 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import OrderDisplay from "./components/square/OrderDisplay";
-import Dashboard from "./components/square/Dashboard";
+import Dashboard from "./components/square/dashboard/Dashboard";
 
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
@@ -34,7 +34,6 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <Navbar />
             <Route exact path="/" component={Landing} />
             <div className="container">
               <Route exact path="/register" component={Register} />
@@ -44,7 +43,6 @@ class App extends Component {
               <Route exact path="/orderdisplay" component={OrderDisplay} />
               <Route exact path="/resetpassword" component={ResetPassword} />
             </div>
-            <Footer />
           </div>
         </Router>
       </Provider>

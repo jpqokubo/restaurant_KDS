@@ -81,7 +81,7 @@ class Order extends Component {
       this.state.items,
       this.props.square.items
     );
-    console.log(diffOrders);
+    console.log(this.props.square.items);
 
     if (diffOrders.length !== 0 && diffOrders[0].op !== "remove") {
       if (diffOrders[0].op === "add") {

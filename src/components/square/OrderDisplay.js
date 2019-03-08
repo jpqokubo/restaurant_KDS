@@ -4,6 +4,7 @@ import Order from "./Order";
 import Categories from "./Categories";
 import ItemQuantity from "./ItemQuantity";
 import Stopwatch from "../utils/Stopwatch";
+import Navbar from "../layout/Navbar";
 
 class OrderDisplay extends Component {
   onClick = () => {
@@ -13,6 +14,7 @@ class OrderDisplay extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <Categories />
         <ItemQuantity />
 

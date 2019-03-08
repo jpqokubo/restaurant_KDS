@@ -16,7 +16,7 @@ class OauthLogin extends Component {
           className="btn btn-primary"
           href="http://localhost:5000/api/users/oauthlogin"
         >
-          Log in{" "}
+          Connect with Square
         </a>
       </div>
     );

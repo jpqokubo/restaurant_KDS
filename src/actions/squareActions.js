@@ -10,19 +10,22 @@ import {
   DONE_ORDER,
   ORDERS_BYQUANTITY,
   OVERDUE_TIMER,
-  ITEM_COUNT
+  ITEM_COUNT,
+  GET_AVERAGE,
+  LOADER
 } from "./types";
 import uuid from "uuid";
+import _ from "lodash";
+import moment from "moment";
 
 export const getTransactions = () => dispatch => {
   axios
     .get("/api/square/orderslist")
     .then(res => {
       const newOrder = res.data.data;
-
       return axios.get("/api/square/getcompletedtrans").then(response => {
         const checkForPending = response.data.data;
-
+        console.log(checkForPending);
         if (checkForPending) {
           const orderCompleted = checkForPending.filter(order => {
             return !order.completed;
@@ -165,5 +168,50 @@ export const item_count = item => dispatch => {
   dispatch({
     type: ITEM_COUNT,
     payload: item
+  });
+};
+
+export const get_average = (beginDate, endDate) => dispatch => {
+  axios
+    .post("/api/square/getAverageTransactions", {
+      beginDate: beginDate,
+      endDate: endDate
+    })
+    .then(res => {
+      // function getSum(total, num) {
+      //   return total + num;
+      // }
+      // const net_sales = [];
+      // res.data.map((item, index) => {
+      //   net_sales.push(item.net_sales_money.amount);
+      // });
+      // const net_sales_length = net_sales.length;
+      // const net_sale_total = net_sales.reduce(getSum);
+      // const net_sales_average = net_sale_total / net_sales_length;
+
+      var values = _.chain(res.data)
+        .groupBy(datum =>
+          moment(datum.created_at)
+            .format("MM-DD-YY")
+            .toLocaleUpperCase()
+        )
+        .map(function(el, date) {
+          return {
+            date: date,
+            el
+          };
+        })
+        .value();
+      console.log(values);
+      dispatch({
+        type: GET_AVERAGE,
+        payload: values
+      });
+    });
+};
+export const loader = data => dispatch => {
+  dispatch({
+    type: LOADER,
+    payload: data
   });
 };

@@ -13,3 +13,5 @@ export const ORDERS_BYQUANTITY = "ORDERS_BYQUANTITY";
 export const OVERDUE_TIMER = "OVERDUE_TIMER";
 export const ITEM_COUNT = "ITEM_COUNT";
 export const CREATE_ORDER = "CREATE_ORDER";
+export const GET_AVERAGE = "GET_AVERAGE";
+export const LOADER = "LOADER";
