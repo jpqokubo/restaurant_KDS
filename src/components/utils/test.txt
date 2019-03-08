@@ -1,0 +1,30 @@
+stream data.io pre-req
+
+ // Your api URL
+    var url = 'http://mysite.com/myJsonRestService';
+
+    // add whatever header required by your API
+    var headers = ['Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ=='];
+
+    var myEventSource = streamdataio.createEventSource(url,<app_token>, headers);
+
+    square connect url 
+
+     https://connect.squareup.com
+     'https://connect.squareup.com/v1/3XT6YVHAYDPFS/payments?order=ASC&begin_time=2018-12-12T00%3A00%3A00Z',
+
+
+    access_token = 'REPLACE_ME'
+
+# The ID of the location you want to create an item for.
+# See payments-report.py for an example of getting a business's location IDs.
+location_id = 'REPLACE_ME'
+
+# The base URL for every Connect API request
+connection = httplib.HTTPSConnection('connect.squareup.com')
+
+# Standard HTTP headers for every Connect API request
+request_headers = {'Authorization': 'Bearer ' + access_token,
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json'}
+connection.request('POST', '/v1/' + location_id + '/items', request_body, request_headers)
